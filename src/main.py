@@ -8,7 +8,7 @@ from pybrain.structure import SigmoidLayer
 
 import matplotlib.pyplot as plt
 
-from fileParse import fileParse
+from fileParse import fileParse, generateDataset
 
 import numpy as np
 import math
@@ -17,15 +17,24 @@ def main():
   num_inputs = 1
   num_hidden = 20
   num_outputs = 1
-  filename = '../data/data.csv'
+
+  num_prev_waves = 5
+
+
+  filename = '../data/10_11_0000.csv'
 
   parsed = fileParse(filename)
-  dataset = SupervisedDataSet(num_inputs, num_outputs)
-  for line in parsed:
-    input_data = line[0:num_inputs]
-    output_data = line[num_inputs:]
+  [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, parsed)
 
-    dataset.addSample(input_data, output_data)
+  for inp, tar in dataset:
+    print "-------------------------------------------"
+    print inp, tar
+  # for line in parsed:
+  #   input_data = line[0:num_inputs]
+  #   output_data = line[num_inputs:]
+  #   print "Input:", input_data
+  #   print "Output:", output_data
+  #   dataset.addSample(input_data, output_data)
 
   # dataset.addSample([1, 1], [0])
   # dataset.addSample([0, 0], [0])
@@ -45,30 +54,11 @@ def main():
   for ii in range(0, num_epochs):
     print ii, trainer.train()
 
-  x = np.arange(-6.28, 6.28, .01)
-  y = []
-  for item in x:
-    y.append(NN.activate([item]))
-  
+  # x = np.arange(-6.28, 6.28, .01)
+  # y = []
+  # for item in x:
+  #   y.append(NN.activate([item]))
 
-
-
-
-  # print NN.activate([0,0])
-  # print NN.activate([1,1])
-  # print NN.activate([0,1])
-  # print NN.activate([1,0])
-
-  plt.plot(x, y, label = "NN")
-  plt.plot(x, map(math.sin, x), label="Truth")
-  plt.legend()
-  plt.show()
-
-
-  # for inputs, target in dataset:
-  #   print inputs, target
-  #res = NN.activate(inputData)
-  # print res
   return 0
 
 
