@@ -13,25 +13,22 @@ def fileParse(filename):
       res.append(newrow)
   return res
 
-def normalizeData(dataset, num_in, num_out):
-  inputset = []
-  curr_max = [0] * num_in
+def normalizeData(dataset):
+  curr_max = [0] * len(dataset[0])
   for item in dataset:
-    inputs = item[0:num_in]
-    inputset.append(inputs)
-    for input_id, num in enumerate(inputs):
-      curr_max[input_id] = max(abs(num), curr_max[input_id])
+    for item_id, num in enumerate(item):
+      curr_max[item_id] = max(abs(num), curr_max[item_id])
 
-  for input_id, inputs in enumerate(inputset):
-    for val_id, val in enumerate(inputs):
-      inputset[input_id][val_id] = val/curr_max[val_id]
 
   returnset = []
+  for data_id, datapoint in enumerate(dataset):
+    return_data = []
+    for val_id, val in enumerate(datapoint):
+      return_data.append(val/curr_max[val_id])
+    returnset.append(return_data)
 
-  for input_num, inputs in enumerate(inputset):
-    returnset.append(inputs+dataset[input_num][num_in:])
 
-  print curr_max
+  # print curr_max
   return returnset
 
 def generateDataset(prev_waves, parsed):
