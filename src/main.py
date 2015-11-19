@@ -1,22 +1,16 @@
-from pybrain.tools.shortcuts import buildNetwork
-from pybrain.datasets import SupervisedDataSet
-from pybrain.supervised.trainers import BackpropTrainer
-from pybrain.utilities import percentError
-from pybrain.structure.modules   import SoftmaxLayer
-from pybrain.structure import TanhLayer
-from pybrain.structure import SigmoidLayer
 
 import matplotlib.pyplot as plt
 
 from fileParse import fileParse, generateDataset, normalizeData
-
+from crossValidate import crossValidate
 import numpy as np
 import math
 
 def main():
   num_hidden = 20
   num_prev_waves = 5
-
+  num_epochs = 10
+  num_folds = 5
 
   filename = '../data/10_11_0000.csv'
 
@@ -27,6 +21,11 @@ def main():
   print "Num Inputs:", num_inputs
   print "Num Outputs:", num_outputs
   print "Num Hidden Nodes:", num_hidden
+
+
+  [height_error, period_error] = crossValidate(dataset, num_hidden, num_folds, num_epochs)
+  print "Height Error:", height_error
+  print "Period Error:", period_error
 
   # for inp, tar in dataset:
   #   print "-------------------------------------------"
@@ -47,13 +46,16 @@ def main():
   #   print item
 
 
-  NN = buildNetwork(num_inputs, num_hidden, num_outputs, bias=True, hiddenclass=SigmoidLayer, outclass=SigmoidLayer)
-  trainer = BackpropTrainer(NN, dataset=dataset, momentum=0.0, verbose=False, weightdecay=0.0)
   
-  num_epochs = 1000
-  outs = []
-  for ii in range(0, num_epochs):
-    print ii, trainer.train()
+  # trainer = BackpropTrainer(NN, dataset=dataset, momentum=0.0, verbose=False, weightdecay=0.0)
+  #evaluation = ModuleValidator.MSE(trainer.module, dataset)
+  #validator = CrossValidator(trainer, dataset,val_func=evaluation, n_folds=5, max_epochs=num_epochs, verbose=True)
+  #print validator.validate()
+
+  
+  # outs = []
+  # for ii in range(0, num_epochs):
+  #   print ii, trainer.train()
 
   # x = np.arange(-6.28, 6.28, .01)
   # y = []
@@ -61,6 +63,10 @@ def main():
   #   y.append(NN.activate([item]))
 
   return 0
+
+
+
+    
 
 
 if __name__ == "__main__":
