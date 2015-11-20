@@ -9,8 +9,8 @@ import math
 def main():
   num_hidden = 20
   num_prev_waves = 5
-  num_epochs = 10
   num_folds = 5
+  num_runs = 5
 
   filename = '../data/10_11_0000.csv'
 
@@ -22,10 +22,18 @@ def main():
   print "Num Outputs:", num_outputs
   print "Num Hidden Nodes:", num_hidden
 
+  outfile = open("../output/"+filename[8:], 'w')
+  epochs = [10, 25, 50, 75, 100, 150, 200, 250, 300, 400, 500]
+  #epochs = [1, 2, 3]
+  for run in range(0, num_runs):
+    print "Run:", run
+    for num_epochs in epochs:
+      print "Epochs:", num_epochs
+      [height_error, period_error] = crossValidate(dataset, num_hidden, num_folds, num_epochs)
+      outfile.write(str(height_error) + ", " + str(period_error) +"\n")
+    outfile.write("\n")
 
-  [height_error, period_error] = crossValidate(dataset, num_hidden, num_folds, num_epochs)
-  print "Height Error:", height_error
-  print "Period Error:", period_error
+
 
   # for inp, tar in dataset:
   #   print "-------------------------------------------"

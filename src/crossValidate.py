@@ -40,6 +40,7 @@ def crossValidate(full_dataset, num_hidden, num_folds, num_epochs):
     for jj in range(0, len(eval_set)):
       nn_out = NN.activate(eval_set[jj][0])
       error = eval_set[jj][1] - nn_out
+      error = map(pow, error, [2]*num_outputs)
       total_error = map(operator.add, error, total_error)
     fold_error = map(operator.div, total_error, [len(eval_set)]*num_outputs)
     mean_error = map(operator.add, mean_error, fold_error)
