@@ -1,0 +1,121 @@
+Previous Waves Experiment
+
+Run: 0
+===========================================================================
+Train on Calm Seas
+Number of Previous Waves: 5
+Avg Height Error: [96.68028085137756, 259.92011653147648]
+Avg Period Error: [69.309105641922045, 49.032387853324003]
+Number of Previous Waves: 7
+Avg Height Error: [88.474064724452617, 241.14394819996414]
+Avg Period Error: [39.655756128903711, 48.535510958082355]
+Number of Previous Waves: 10
+Avg Height Error: [156.86676571933029, 402.69521519651045]
+Avg Period Error: [41.828678845840116, 47.50700567712304]
+===========================================================================
+Train on Rough Seas
+Number of Previous Waves: 5
+Avg Height Error: [1219.8357447176729, 520.20836475691442]
+Avg Period Error: [59.450098933905956, 81.434574158050808]
+Number of Previous Waves: 7
+Avg Height Error: [1173.4607427754611, 503.87756115527048]
+Avg Period Error: [223.60646080093346, 212.89125300141905]
+Number of Previous Waves: 10
+Avg Height Error: [454.8141670719221, 144.94086063944403]
+Avg Period Error: [223.4480804511449, 212.36756285997279]
+
+Run: 1
+===========================================================================
+Train on Calm Seas
+Number of Previous Waves: 5
+Avg Height Error: [140.6053971491371, 377.01824685751387]
+Avg Period Error: [46.367876374598595, 52.675179017943883]
+Number of Previous Waves: 7
+Avg Height Error: [127.92055432834184, 360.11958546605121]
+Avg Period Error: [44.66693118109508, 53.868180392693418]
+Number of Previous Waves: 10
+Avg Height Error: [107.51711474484162, 313.64312022629997]
+Avg Period Error: [43.093166960575182, 50.062210272969118]
+===========================================================================
+Train on Rough Seas
+Number of Previous Waves: 5
+Avg Height Error: [519.34324548767279, 166.90648624023206]
+Avg Period Error: [50.868925390910313, 56.885769994451422]
+Number of Previous Waves: 7
+Avg Height Error: [711.94391863026976, 266.56191068912528]
+Avg Period Error: [71.191365936542923, 60.755476097661983]
+Number of Previous Waves: 10
+Avg Height Error: [468.22295156930045, 154.71333805744348]
+Avg Period Error: [74.837455161145243, 57.186698590189984]
+
+Run: 2
+===========================================================================
+Train on Calm Seas
+Number of Previous Waves: 5
+Avg Height Error: [122.39652377543632, 357.81771277563229]
+Avg Period Error: [52.074066681696259, 37.266445982541534]
+Number of Previous Waves: 7
+Avg Height Error: [127.88038679114788, 519.41608656262338]
+Avg Period Error: [45.116216450476657, 57.826385372648161]
+Number of Previous Waves: 10
+Avg Height Error: [347.88665041488076, 870.23269166860246]
+Avg Period Error: [48.914616688170554, 44.810421262295264]
+===========================================================================
+Train on Rough Seas
+Number of Previous Waves: 5
+Avg Height Error: [443.14376032470119, 169.82765453792186]
+Avg Period Error: [58.671455200255465, 56.471606671586805]
+Number of Previous Waves: 7
+Avg Height Error: [400.204809638965, 165.12763480686769]
+Avg Period Error: [63.67938687059231, 58.49702614080843]
+Number of Previous Waves: 10
+Avg Height Error: [1195.1615818058688, 492.17076409668596]
+Avg Period Error: [225.53534959094586, 214.2051414200175]
+
+Run: 3
+===========================================================================
+Train on Calm Seas
+Number of Previous Waves: 5
+Avg Height Error: [91.336063964589925, 227.62533635988513]
+Avg Period Error: [154.93135738907384, 163.64491822077363]
+Number of Previous Waves: 7
+Avg Height Error: [88.762138775652915, 104.81547811636658]
+Avg Period Error: [50.8169794262948, 66.550981432255128]
+Number of Previous Waves: 10
+Avg Height Error: [247.17168145851423, 597.48895394355259]
+Avg Period Error: [40.239564570689303, 42.627566481380171]
+===========================================================================
+Train on Rough Seas
+Number of Previous Waves: 5
+Avg Height Error: [145.20122461405828, 99.583045798097089]
+Avg Period Error: [225.15867383228618, 214.25251652744424]
+Number of Previous Waves: 7
+Avg Height Error: [1185.1839099330966, 502.18349599345146]
+Avg Period Error: [64.507526396623035, 53.374569953911937]
+Number of Previous Waves: 10
+Avg Height Error: [414.32370167515654, 152.07167996075248]
+Avg Period Error: [48.035825642638812, 48.861147346790432]
+
+Run: 4
+===========================================================================
+Train on Calm Seas
+Number of Previous Waves: 5
+Avg Height Error: [89.039050496262703, 79.599424986039878]
+Avg Period Error: [40.890862421722801, 57.52671039952638]
+Number of Previous Waves: 7
+Avg Height Error: [79.436107857457372, 116.04190092942575]
+Avg Period Error: [37.457894082217834, 44.488677057801375]
+Number of Previous Waves: 10
+Avg Height Error: [112.49905518143879, 312.92755417433511]
+Avg Period Error: [46.473511367149875, 49.048649397302533]
+===========================================================================
+Train on Rough Seas
+Number of Previous Waves: 5
+Avg Height Error: [452.200772985757, 152.38665669498693]
+Avg Period Error: [53.941682838045551, 50.306291304254465]
+Number of Previous Waves: 7
+Avg Height Error: [327.83174928411739, 124.84538688843898]
+Avg Period Error: [75.818861240061693, 54.16082043059172]
+Number of Previous Waves: 10
+Avg Height Error: [249.48447648631668, 105.27572613749851]
+Avg Period Error: [59.149844246248826, 49.913123252529218]

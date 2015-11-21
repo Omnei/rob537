@@ -45,12 +45,15 @@ def generateDataset(prev_waves, parsed):
 
     for ii in range(-prev_waves, 0):
       input_data = input_data + parsed[point_id + ii]
-
     output_data = point
+
     dataset.append([input_data, output_data])
     #dataset.addSample(input_data, output_data)
     # input_dataset.append(input_data)
     # output_dataset.append(output_data)
+  #print "IO Len", len(input_data), len(output_data)
+  #datapoint = [height0, period0, height1, period1, ... ,heightN, periodN]
+  #print "Datapoint_len",len(dataset[0][0])
   return [dataset, num_inputs, num_outputs]
   # return input_dataset, output_dataset
 

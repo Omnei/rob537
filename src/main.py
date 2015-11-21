@@ -1,29 +1,39 @@
 
-import matplotlib.pyplot as plt
-
-from fileParse import fileParse, generateDataset, normalizeData
-from crossValidate import crossValidate, getErrorPercent
-import numpy as np
-import math
+# import matplotlib.pyplot as plt
+from experiments import prevWavesExp, hiddenNodesExp, generalizabilityExp
+# from fileParse import fileParse, generateDataset, normalizeData
+# from evaluation import crossValidate, getErrorPercent, trainNN, showPredictedWave
+# import numpy as np
+# import math
 
 def main():
-  num_hidden = 20
-  num_prev_waves = 5
-  num_folds = 5
-  num_runs = 1
+  #prevWavesExp()
+  #hiddenNodesExp()
+  generalizabilityExp()
+  # num_hidden = 20
+  # num_prev_waves = 5
+  # num_folds = 5
+  # num_runs = 1
+  # num_epochs = 400
+  # #filename = 
+  # filenames = ['../data/10_11_0000.csv', '../data/10_11_0600.csv']#, '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1200.csv', '../data/11_11_1800.csv', ]
+  # datasets = []
+  # for filename in filenames:
+  #   parsed = fileParse(filename)
+  #   normalized_parsed = normalizeData(parsed)
+  #   [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
+  #   datasets.append(dataset)
 
-  #filename = 
-  filenames = ['../data/10_11_0000.csv', '../data/10_11_0600.csv']#, '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_10_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1200.csv']
-  datasets = []
-  for filename in filenames:
-    parsed = fileParse(filename)
-    normalized_parsed = normalizeData(parsed)
-    [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
-    datasets.append(dataset)
+  # print "Num Inputs:", num_inputs
+  # print "Num Outputs:", num_outputs
+  # print "Num Hidden Nodes:", num_hidden
 
-  print "Num Inputs:", num_inputs
-  print "Num Outputs:", num_outputs
-  print "Num Hidden Nodes:", num_hidden
+
+  # dataset = datasets[0]
+  # NN = trainNN(dataset, num_hidden, num_epochs)
+  # showPredictedWave(NN, dataset[5])
+
+  #getErrorPercent(datasets[0], datasets, num_hidden, 400)
 
   # outfile = open("../output/2_"+filename[8:], 'w')
   # epochs = [10, 25, 50, 75, 100, 150, 200, 250, 300, 400, 500]
@@ -35,7 +45,7 @@ def main():
   #     [height_error, period_error] = crossValidate(dataset, num_hidden, num_folds, num_epochs)
   #     outfile.write(str(height_error) + ", " + str(period_error) +"\n")
   #   outfile.write("\n") 
-  getErrorPercent(datasets[0], datasets, num_hidden, 400)
+  
 
 
 
