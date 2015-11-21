@@ -47,3 +47,43 @@ def crossValidate(full_dataset, num_hidden, num_folds, num_epochs):
     print "Fold Error:", fold_error
   mean_error = map(operator.div, mean_error, [num_folds]*num_outputs)
   return mean_error
+
+def getErrorPercent(training_dataset, eval_dataset_list, num_hidden, num_epochs):
+  num_datapoints = len(training_dataset)
+  num_inputs = len(training_dataset[0][0])
+  num_outputs = len(training_dataset[0][1])
+  NN = buildNetwork(num_inputs, num_hidden, num_outputs, bias=True, hiddenclass=SigmoidLayer, outclass=SigmoidLayer)
+  
+  dataset = SupervisedDataSet(num_inputs, num_outputs)
+  for datapoint in training_dataset:
+    dataset.addSample(datapoint[0], datapoint[1])
+
+
+  trainer = BackpropTrainer(NN, dataset=dataset, momentum=0.0, verbose=False, weightdecay=0.0)
+  
+  for epoch in range(0, num_epochs):
+    #print epoch 
+    trainer.train()
+  
+  errors = []
+  for eval_set in eval_dataset_list:
+    total_percent_errors = [0]*num_outputs
+    for jj in range(0, len(eval_set)):
+      nn_out = NN.activate(eval_set[jj][0])
+      percent_error = computeError(eval_set[jj][1], nn_out)
+      #print percent_error
+      total_percent_errors = map(operator.add, percent_error, total_percent_errors)
+    #print total_percent_errors
+    errors.append(map(operator.div, total_percent_errors, [len(dataset)]*num_outputs))
+  print errors
+  return errors
+
+def computeError(actual, calculated):
+  diff = map(operator.sub, calculated, actual)
+  print diff
+  abs_diff = map(abs, diff)
+  abs_actual = map(abs, actual)
+  res = map(operator.div, abs_diff, abs_actual)
+  res = map(operator.mul, res, [100]*len(calculated))
+  #print res
+  return res

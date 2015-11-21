@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 
 from fileParse import fileParse, generateDataset, normalizeData
-from crossValidate import crossValidate
+from crossValidate import crossValidate, getErrorPercent
 import numpy as np
 import math
 
@@ -10,28 +10,33 @@ def main():
   num_hidden = 20
   num_prev_waves = 5
   num_folds = 5
-  num_runs = 5
+  num_runs = 1
 
-  filename = '../data/10_11_0000.csv'
-
-  parsed = fileParse(filename)
-  normalized_parsed = normalizeData(parsed)
-  [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
+  #filename = 
+  filenames = ['../data/10_11_0000.csv', '../data/10_11_0600.csv']#, '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_10_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1200.csv']
+  datasets = []
+  for filename in filenames:
+    parsed = fileParse(filename)
+    normalized_parsed = normalizeData(parsed)
+    [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
+    datasets.append(dataset)
 
   print "Num Inputs:", num_inputs
   print "Num Outputs:", num_outputs
   print "Num Hidden Nodes:", num_hidden
 
-  outfile = open("../output/"+filename[8:], 'w')
-  epochs = [10, 25, 50, 75, 100, 150, 200, 250, 300, 400, 500]
-  #epochs = [1, 2, 3]
-  for run in range(0, num_runs):
-    print "Run:", run
-    for num_epochs in epochs:
-      print "Epochs:", num_epochs
-      [height_error, period_error] = crossValidate(dataset, num_hidden, num_folds, num_epochs)
-      outfile.write(str(height_error) + ", " + str(period_error) +"\n")
-    outfile.write("\n")
+  # outfile = open("../output/2_"+filename[8:], 'w')
+  # epochs = [10, 25, 50, 75, 100, 150, 200, 250, 300, 400, 500]
+  # #epochs = [1, 2, 3]
+  # for run in range(0, num_runs):
+  #   print "Run:", run
+  #   for num_epochs in epochs:
+  #     print "Epochs:", num_epochs
+  #     [height_error, period_error] = crossValidate(dataset, num_hidden, num_folds, num_epochs)
+  #     outfile.write(str(height_error) + ", " + str(period_error) +"\n")
+  #   outfile.write("\n") 
+  getErrorPercent(datasets[0], datasets, num_hidden, 400)
+
 
 
 
