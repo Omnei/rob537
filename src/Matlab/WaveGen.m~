@@ -2,15 +2,13 @@
 
 %% Setting up Intial Parameters
 
-clearvars -except InputData
+clear -except InputData
 clc
-
-set(0,'RecursionLimit',1000)
 
 period = zeros(8,1);
 wave_h = zeros(8,1);
 
-row = 8;
+row = 1;
 
 % Based on Bouy Data - used Bouy Station 46050
 sig_wave_h = InputData(row,5) * 0.3048;
@@ -126,7 +124,7 @@ end
 
 %% Output to CSV File
 
-csvwrite('11_11_1800.csv',filtHAndP)
+csvwrite('10_11_100.csv',hAndP)
 
 
 
