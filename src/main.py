@@ -7,9 +7,9 @@ from experiments import prevWavesExp, hiddenNodesExp, generalizabilityExp
 # import math
 
 def main():
-  prevWavesExp()
-  #hiddenNodesExp()
-  #generalizabilityExp()
+  #prevWavesExp()
+  hiddenNodesExp()
+  generalizabilityExp()
   # num_hidden = 20
   # num_prev_waves = 5
   # num_folds = 5

@@ -8,7 +8,7 @@ from experiments import prevWavesExp, hiddenNodesExp, generalizabilityExp
 
 def main():
   #prevWavesExp()
-  #hiddenNodesExp()
+  hiddenNodesExp()
   generalizabilityExp()
   # num_hidden = 20
   # num_prev_waves = 5
