@@ -90,10 +90,10 @@ def hiddenNodesExp():
   outfile = open("../output/hiddenNodesExp.txt", 'w')
 
   num_hidden = 20
-  num_prev_waves = 10
+  num_prev_waves = 5
   prev_waves = [5, 7, 10]
   num_folds = 5
-  num_runs = 5
+  num_runs = 10
   num_epochs = 400
 
   print "Hidden Nodes Experiment"
@@ -169,7 +169,7 @@ def generalizabilityExp():
   outfile = open("../output/generalizabilityExp.txt", 'w')
 
   num_hidden = 20
-  num_prev_waves = 10
+  num_prev_waves = 5
   prev_waves = [5, 7, 10]
   num_folds = 5
   num_runs = 5
