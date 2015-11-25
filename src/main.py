@@ -9,13 +9,13 @@ from experiments import prevWavesExp, hiddenNodesExp, generalizabilityExp
 def main():
   #prevWavesExp()
   hiddenNodesExp()
-  generalizabilityExp()
+  #generalizabilityExp()
   # num_hidden = 20
   # num_prev_waves = 5
   # num_folds = 5
   # num_runs = 1
   # num_epochs = 400
-  # #filename = 
+  # #filename =
   # filenames = ['../data/10_11_0000.csv', '../data/10_11_0600.csv']#, '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1200.csv', '../data/11_11_1800.csv', ]
   # datasets = []
   # for filename in filenames:
@@ -44,8 +44,8 @@ def main():
   #     print "Epochs:", num_epochs
   #     [height_error, period_error] = crossValidate(dataset, num_hidden, num_folds, num_epochs)
   #     outfile.write(str(height_error) + ", " + str(period_error) +"\n")
-  #   outfile.write("\n") 
-  
+  #   outfile.write("\n")
+
 
 
 
@@ -69,13 +69,13 @@ def main():
   #   print item
 
 
-  
+
   # trainer = BackpropTrainer(NN, dataset=dataset, momentum=0.0, verbose=False, weightdecay=0.0)
   #evaluation = ModuleValidator.MSE(trainer.module, dataset)
   #validator = CrossValidator(trainer, dataset,val_func=evaluation, n_folds=5, max_epochs=num_epochs, verbose=True)
   #print validator.validate()
 
-  
+
   # outs = []
   # for ii in range(0, num_epochs):
   #   print ii, trainer.train()
@@ -89,7 +89,7 @@ def main():
 
 
 
-    
+
 
 
 if __name__ == "__main__":
