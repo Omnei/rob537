@@ -5,10 +5,14 @@ from experiments import prevWavesExp, hiddenNodesExp, generalizabilityExp
 # from evaluation import crossValidate, getErrorPercent, trainNN, showPredictedWave
 # import numpy as np
 # import math
+from format import formatOutput, formatMat
 
 def main():
+  [rough_seas, calm_seas] = formatOutput('../output/generalizabilityExp.txt')
+  #print rough_seas
+  formatMat(rough_seas)
   #prevWavesExp()
-  hiddenNodesExp()
+  #hiddenNodesExp()
   #generalizabilityExp()
   # num_hidden = 20
   # num_prev_waves = 5
