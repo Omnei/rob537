@@ -1,6 +1,6 @@
 
 # import matplotlib.pyplot as plt
-from experiments import prevWavesExp, hiddenNodesExp, generalizabilityExp, baselineExp
+from experiments import prevWavesExp, hiddenNodesExp, generalizabilityExp, baselineExp, avgWavesExp
 from fileParse import fileParse, generateDataset, normalizeData
 from evaluation import crossValidate, getErrorPercent, trainNN, showPredictedWave
 # import numpy as np
@@ -13,8 +13,8 @@ def main():
   #[rough_seas, calm_seas] = formatOutput('../output/generalizabilityExp.txt')
   #print rough_seas
   #formatMat(rough_seas)
-  prevWavesExp()
-
+  #prevWavesExp()
+  avgWavesExp()
   #hiddenNodesExp()
   #generalizabilityExp()
   # num_hidden = 20
