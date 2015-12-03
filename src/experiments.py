@@ -5,6 +5,39 @@ rough_seas = '../data/10_11_0000.csv'
 calm_seas = '../data/11_11_1200.csv'
 random_seas = '../data/10_11_1800.csv'
 
+
+
+
+
+
+
+def baselineExp():
+  outfile = open("../output/baselineExp.txt", 'w')
+  num_runs = 5
+  print "BaselineExp"
+  filenames = ['../data/10_11_0000.csv', '../data/10_11_0600.csv', '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1200.csv', '../data/11_11_1800.csv', ]
+  outfile.write("Dataset Avg_Height_Error Avg_Period_Error\n")
+  for filename in filenames:
+    parsed = fileParse(filename)
+    normalized_parsed = normalizeData(parsed)
+    avg_height_error = 0
+    avg_period_error = 0
+    for ii, item in enumerate(normalized_parsed[1:]):
+      height_error = abs((item[0]-normalized_parsed[ii-1][0])*100)/item[0]
+      period_error = abs((item[1]-normalized_parsed[ii-1][1])*100)/item[1]
+
+      avg_period_error += period_error
+      avg_height_error += height_error
+    avg_height_error = avg_height_error/len(normalized_parsed)
+    avg_period_error = avg_period_error/len(normalized_parsed)
+    outfile.write(filename+" "+str(avg_height_error)+" "+str(avg_period_error)+"\n")
+    print avg_height_error, avg_period_error
+
+
+
+
+
+
 def prevWavesExp():
   outfile = open("../output/prevWavesExp.txt", 'w')
 

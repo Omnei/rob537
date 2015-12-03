@@ -1,16 +1,17 @@
 
 # import matplotlib.pyplot as plt
-from experiments import prevWavesExp, hiddenNodesExp, generalizabilityExp
-# from fileParse import fileParse, generateDataset, normalizeData
-# from evaluation import crossValidate, getErrorPercent, trainNN, showPredictedWave
+from experiments import prevWavesExp, hiddenNodesExp, generalizabilityExp, baselineExp
+from fileParse import fileParse, generateDataset, normalizeData
+from evaluation import crossValidate, getErrorPercent, trainNN, showPredictedWave
 # import numpy as np
 # import math
 from format import formatOutput, formatMat
 
 def main():
-  [rough_seas, calm_seas] = formatOutput('../output/generalizabilityExp.txt')
+  baselineExp()
+  #[rough_seas, calm_seas] = formatOutput('../output/generalizabilityExp.txt')
   #print rough_seas
-  formatMat(rough_seas)
+  #formatMat(rough_seas)
   #prevWavesExp()
   #hiddenNodesExp()
   #generalizabilityExp()
@@ -19,7 +20,7 @@ def main():
   # num_folds = 5
   # num_runs = 1
   # num_epochs = 400
-  # #filename =
+  # # #filename =
   # filenames = ['../data/10_11_0000.csv', '../data/10_11_0600.csv']#, '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1200.csv', '../data/11_11_1800.csv', ]
   # datasets = []
   # for filename in filenames:

@@ -137,17 +137,20 @@ def showPredictedWave(NN, datapoint):
   plt.figure(1)
   plt.plot(x, y)
   if tick:
-    plt.plot([x_pos, x_pos + datapoint[1][1]], [height, height+datapoint[1][0]], label="actual")
-    plt.plot([x_pos, x_pos + nextWave[1]], [height, height+nextWave[0]], label="predicted")
+    plt.plot([x_pos, x_pos + datapoint[1][1]], [height, height+datapoint[1][0]], label="Actual")
+    plt.plot([x_pos, x_pos + nextWave[1]], [height, height+nextWave[0]], label="Predicted")
   else:
-    plt.plot([x_pos, x_pos + datapoint[1][1]], [height, height-datapoint[1][0]], label = "actual")
-    plt.plot([x_pos, x_pos + nextWave[1]], [height, height-nextWave[0]], label="predicted")
+    plt.plot([x_pos, x_pos + datapoint[1][1]], [height, height-datapoint[1][0]], label = "Actual")
+    plt.plot([x_pos, x_pos + nextWave[1]], [height, height-nextWave[0]], label="Predicted")
   #plt.legend()
 
   print datapoint[0]
 
 
   plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+  plt.xlabel("Normalized Period")
+  plt.ylabel("Normalized Wave Height")
+  plt.title("Sample Prediction")
   ax = plt.gca()
   box = ax.get_position()
   ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
