@@ -1,0 +1,6 @@
+Average Waves Experiment
+
+Run: 1
+===========================================================================
+Train on Calm Seas
+Number of Previous Waves: 5

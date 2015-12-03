@@ -290,7 +290,7 @@ def avgWavesExp():
   outfile = open("../output/avgWavesExp.txt", 'w')
 
   num_hidden = 20
-  #num_prev_waves = 5
+  num_prev_waves = 10
   prev_waves = 10
   num_folds = 5
   num_runs = 1
@@ -320,7 +320,7 @@ def avgWavesExp():
         # To Run with predicting next wave
         #[dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
         # To Run with predicting average of some number of next waves
-        [dataset, num_inputs, num_outputs] = generateDatasetAverage(num_prev_waves, num_avg_avg, normalized_parsed)
+        [dataset, num_inputs, num_outputs] = generateDatasetAverage(num_prev_waves, num_avg_waves, normalized_parsed)
         datasets.append(dataset)
 
       training_dataset = datasets[0]
@@ -355,7 +355,7 @@ def avgWavesExp():
         # To Run with predicting next wave
         #[dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
         # To Run with predicting average of some number of next waves
-        [dataset, num_inputs, num_outputs] = generateDatasetAverage(num_prev_waves, num_avg_avg, normalized_parsed)
+        [dataset, num_inputs, num_outputs] = generateDatasetAverage(num_prev_waves, num_avg_waves, normalized_parsed)
         datasets.append(dataset)
 
       training_dataset = datasets[0]
