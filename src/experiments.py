@@ -1,5 +1,5 @@
 from evaluation import getErrorPercent
-from fileParse import fileParse, generateDataset, normalizeData
+from fileParse import fileParse, generateDataset, normalizeData, generateDatasetAverage
 #filenames = ['../data/10_11_0000.csv', '../data/10_11_0600.csv', '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1200.csv', '../data/11_11_1800.csv', ]
 rough_seas = '../data/10_11_0000.csv'
 calm_seas = '../data/11_11_1200.csv'
@@ -45,8 +45,9 @@ def prevWavesExp():
   #num_prev_waves = 5
   prev_waves = [5, 7, 10]
   num_folds = 5
-  num_runs = 10
+  num_runs = 1
   num_epochs = 400
+  num_after_avg = 5
 
   print "Previous Waves Experiment"
   outfile.write("Previous Waves Experiment"+"\n")
@@ -55,7 +56,7 @@ def prevWavesExp():
     print "Run", run
     outfile.write("\nRun: " + str(run) + "\n")
     print "==========================================================================="
-    print "Train on Calm Seas" 
+    print "Train on Calm Seas"
     outfile.write("===========================================================================\n")
     outfile.write("Train on Calm Seas\n")
 
@@ -68,7 +69,10 @@ def prevWavesExp():
         parsed = fileParse(filename)
         #print len(parsed[0])
         normalized_parsed = normalizeData(parsed)
-        [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
+        # To Run with predicting next wave
+        #[dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
+        # To Run with predicting average of some number of next waves
+        [dataset, num_inputs, num_outputs] = generateDatasetAverage(num_prev_waves, num_after_avg, normalized_parsed)
         datasets.append(dataset)
 
       training_dataset = datasets[0]
@@ -87,7 +91,7 @@ def prevWavesExp():
 
     #rough seas experiment
     print "==========================================================================="
-    print "Train on Rough Seas" 
+    print "Train on Rough Seas"
     outfile.write("==========================================================================="+"\n")
     outfile.write("Train on Rough Seas"+"\n")
 
@@ -116,7 +120,7 @@ def prevWavesExp():
 
       outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
       outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
-  
+
   return 0
 
 def hiddenNodesExp():
@@ -136,12 +140,12 @@ def hiddenNodesExp():
     print "Run", run
     outfile.write("\nRun: " + str(run) + "\n")
     print "==========================================================================="
-    print "Train on Calm Seas" 
+    print "Train on Calm Seas"
     outfile.write("===========================================================================\n")
     outfile.write("Train on Calm Seas\n")
 
     filenames = [calm_seas, rough_seas]
-    
+
     datasets = []
     for filename in filenames:
       parsed = fileParse(filename)
@@ -167,12 +171,12 @@ def hiddenNodesExp():
       outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
 
     print "==========================================================================="
-    print "Train on Rough Seas" 
+    print "Train on Rough Seas"
     outfile.write("===========================================================================\n")
     outfile.write("Train on Rough Seas\n")
 
     filenames = [rough_seas, calm_seas]
-    
+
     datasets = []
     for filename in filenames:
       parsed = fileParse(filename)
@@ -195,7 +199,7 @@ def hiddenNodesExp():
       print "Avg Period Error:", avg_period_error
 
       outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
-      outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")  
+      outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
   return 0
 
 def generalizabilityExp():
@@ -215,7 +219,7 @@ def generalizabilityExp():
     print "Run", run
     outfile.write("\nRun: " + str(run) + "\n")
     print "==========================================================================="
-    print "Train on Calm Seas" 
+    print "Train on Calm Seas"
     outfile.write("===========================================================================\n")
     outfile.write("Train on Calm Seas\n")
 
@@ -245,7 +249,7 @@ def generalizabilityExp():
     outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
 
     print "==========================================================================="
-    print "Train on Rough Seas" 
+    print "Train on Rough Seas"
     outfile.write("===========================================================================\n")
     outfile.write("Train on Rough Seas\n")
 

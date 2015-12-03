@@ -8,11 +8,13 @@ from evaluation import crossValidate, getErrorPercent, trainNN, showPredictedWav
 from format import formatOutput, formatMat
 
 def main():
-  baselineExp()
+
+
   #[rough_seas, calm_seas] = formatOutput('../output/generalizabilityExp.txt')
   #print rough_seas
   #formatMat(rough_seas)
-  #prevWavesExp()
+  prevWavesExp()
+
   #hiddenNodesExp()
   #generalizabilityExp()
   # num_hidden = 20
