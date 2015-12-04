@@ -28,7 +28,7 @@ def crossValidate(full_dataset, num_hidden, num_folds, num_epochs):
     NN = buildNetwork(num_inputs, num_hidden, num_outputs, bias=True, hiddenclass=SigmoidLayer, outclass=SigmoidLayer)
     eval_set = full_dataset[fold_size*ii:min(num_datapoints, fold_size*(ii+1))]
     training_set = full_dataset[0:fold_size*ii]+full_dataset[min(num_datapoints, fold_size*(ii+1)):]
-    
+
 
     dataset = SupervisedDataSet(num_inputs, num_outputs)
     for datapoint in training_set:
@@ -60,18 +60,18 @@ def getErrorPercent(training_dataset, eval_dataset_list, num_hidden, num_epochs)
   # print "Num Hidden Nodes:", num_hidden
 
   NN = buildNetwork(num_inputs, num_hidden, num_outputs, bias=True, hiddenclass=SigmoidLayer, outclass=SigmoidLayer)
-  
+
   dataset = SupervisedDataSet(num_inputs, num_outputs)
   for datapoint in training_dataset:
     dataset.addSample(datapoint[0], datapoint[1])
 
 
   trainer = BackpropTrainer(NN, dataset=dataset, momentum=0.0, verbose=False, weightdecay=0.0)
-  
+
   for epoch in range(0, num_epochs):
     #print epoch 
     trainer.train()
-  
+
   errors = []
   for eval_set in eval_dataset_list:
     total_percent_errors = [0]*num_outputs
@@ -100,16 +100,16 @@ def trainNN(training_dataset, num_hidden, num_epochs):
   num_inputs = len(training_dataset[0][0])
   num_outputs = len(training_dataset[0][1])
   NN = buildNetwork(num_inputs, num_hidden, num_outputs, bias=True, hiddenclass=SigmoidLayer, outclass=SigmoidLayer)
-  
+
   dataset = SupervisedDataSet(num_inputs, num_outputs)
   for datapoint in training_dataset:
     dataset.addSample(datapoint[0], datapoint[1])
 
 
   trainer = BackpropTrainer(NN, dataset=dataset, momentum=0.0, verbose=False, weightdecay=0.0)
-  
+
   for epoch in range(0, num_epochs):
-    print epoch 
+    print epoch
     trainer.train()
 
   return NN
@@ -155,7 +155,3 @@ def showPredictedWave(NN, datapoint):
   box = ax.get_position()
   ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
   plt.show()
-
-
-
-

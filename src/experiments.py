@@ -37,11 +37,11 @@ def prevWavesExp():
   prev_waves = [5, 7, 10, 20]
   num_folds = 5
   num_runs = 10
-  num_epochs = 1
-  num_after_avg = 5
+  num_epochs = 400
+
 
   for run in range(1, num_runs+1):
-    print "\nRun: " + str(run) 
+    print "\nRun: " + str(run)
     for waves_id, num_prev_waves in enumerate(prev_waves):
       datasets = []
       for filename in filenames:
@@ -73,8 +73,7 @@ def hiddenNodesExp():
   num_prev_waves = 10
   num_folds = 5
   num_runs = 10
-  num_epochs = 1
-  num_after_avg = 5
+  num_epochs = 400
 
   hidden_nodes = [7, 15, 20, 30]
 
@@ -87,7 +86,7 @@ def hiddenNodesExp():
     datasets.append(dataset)
 
   for run in range(1, num_runs+1):
-    print "\nRun: " + str(run) 
+    print "\nRun: " + str(run)
 
     for ii, training_dataset in enumerate(datasets):
       for num_hidden in hidden_nodes:
@@ -109,10 +108,10 @@ def generalizabilityExp():
   height_outfile = open("../output/generalizabilityExp_height.csv", 'w')
 
   num_hidden = 20
-  num_prev_waves = 5
+  num_prev_waves = 10
   num_folds = 5
   num_runs = 10
-  num_epochs = 1
+  num_epochs = 400
   eval_filenames = ['../data/10_11_0600.csv', '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1800.csv']
   train_filenames = ['../data/11_11_1200.csv', '../data/10_11_0000.csv']
 
@@ -135,7 +134,7 @@ def generalizabilityExp():
 
 
   for run in range(1, num_runs+1):
-    print "\nRun: " + str(run) 
+    print "\nRun: " + str(run)
 
     for ii, training_dataset in enumerate(training_datasets):
       print "Training on Dataset: " + train_filenames[ii]
@@ -159,12 +158,12 @@ def avgWavesExp():
   prev_waves = 10
   num_folds = 5
   num_runs = 10
-  num_epochs = 1
+  num_epochs = 400
   num_prev_waves = 5
   avg_waves = [5, 10, 15]
 
   for run in range(1, num_runs+1):
-    print "\nRun: " + str(run) 
+    print "\nRun: " + str(run)
 
     for waves_id, num_avg_waves in enumerate(avg_waves):
       datasets = []
@@ -185,4 +184,3 @@ def avgWavesExp():
     period_outfile.write("\n")
     height_outfile.write("\n")
   return 0
-
