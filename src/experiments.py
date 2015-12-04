@@ -3,12 +3,6 @@ from fileParse import fileParse, generateDataset, normalizeData, generateDataset
 #filenames = ['../data/10_11_0000.csv', '../data/10_11_0600.csv', '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1200.csv', '../data/11_11_1800.csv', ]
 rough_seas = '../data/10_11_0000.csv'
 calm_seas = '../data/11_11_1200.csv'
-random_seas = '../data/10_11_1800.csv'
-
-
-
-
-
 
 
 def baselineExp():
@@ -34,342 +28,161 @@ def baselineExp():
     print avg_height_error, avg_period_error
 
 
-
-
-
-
 def prevWavesExp():
-  outfile = open("../output/prevWavesExp.txt", 'w')
+  period_outfile = open("../output/prevWavesExp_period.csv", 'w')
+  height_outfile = open("../output/prevWavesExp_height.csv", 'w')
 
+  filenames = [calm_seas, rough_seas]
   num_hidden = 20
-  #num_prev_waves = 5
-  prev_waves = [5, 7, 10]
+  prev_waves = [5, 7, 10, 20]
   num_folds = 5
-  num_runs = 1
-  num_epochs = 400
+  num_runs = 10
+  num_epochs = 1
   num_after_avg = 5
 
-  print "Previous Waves Experiment"
-  outfile.write("Previous Waves Experiment"+"\n")
-  #calm seas experiment
   for run in range(1, num_runs+1):
-    print "Run", run
-    outfile.write("\nRun: " + str(run) + "\n")
-    print "==========================================================================="
-    print "Train on Calm Seas"
-    outfile.write("===========================================================================\n")
-    outfile.write("Train on Calm Seas\n")
-
-    filenames = [calm_seas, rough_seas]
-    for num_prev_waves in prev_waves:
+    print "\nRun: " + str(run) 
+    for waves_id, num_prev_waves in enumerate(prev_waves):
       datasets = []
-      print "Number of Previous Waves:\n", num_prev_waves
-      outfile.write("Number of Previous Waves: " + str(num_prev_waves) +"\n")
       for filename in filenames:
+        print "Building Dataset:" + str(num_prev_waves) + " - " + filename
         parsed = fileParse(filename)
-        #print len(parsed[0])
-        normalized_parsed = normalizeData(parsed)
-        # To Run with predicting next wave
-        [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
-        # To Run with predicting average of some number of next waves
-        #[dataset, num_inputs, num_outputs] = generateDatasetAverage(num_prev_waves, num_after_avg, normalized_parsed)
-        datasets.append(dataset)
-
-      training_dataset = datasets[0]
-      #print len(training_dataset[0][0])
-      errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
-      avg_height_error = []
-      avg_period_error = []
-      for item in errors:
-        avg_height_error.append(item[0])
-        avg_period_error.append(item[1])
-      print "Avg Height Error:", avg_height_error
-      print "Avg Period Error:", avg_period_error
-
-      outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
-      outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
-
-    #rough seas experiment
-    print "==========================================================================="
-    print "Train on Rough Seas"
-    outfile.write("==========================================================================="+"\n")
-    outfile.write("Train on Rough Seas"+"\n")
-
-    filenames = [rough_seas, calm_seas]
-    for num_prev_waves in prev_waves:
-      datasets = []
-      print "Number of Previous Waves:", num_prev_waves
-      outfile.write("Number of Previous Waves: " + str(num_prev_waves)+"\n")
-      for filename in filenames:
-        parsed = fileParse(filename)
-        #print len(parsed[0])
         normalized_parsed = normalizeData(parsed)
         [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
         datasets.append(dataset)
 
-      training_dataset = datasets[0]
-      #print len(training_dataset[0][0])
-      errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
-      avg_height_error = []
-      avg_period_error = []
-      for item in errors:
-        avg_height_error.append(item[0])
-        avg_period_error.append(item[1])
-      print "Avg Height Error:", avg_height_error
-      print "Avg Period Error:", avg_period_error
-
-      outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
-      outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
-
+      for ii, training_dataset in enumerate(datasets):
+        print "Training on Dataset: "+ str(num_prev_waves) + " - " + filenames[ii]
+        errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
+        for item in errors:
+          print item
+          height_outfile.write(str(item[0]) + ", ")
+          period_outfile.write(str(item[1]) + ", ")
+    period_outfile.write("\n")
+    height_outfile.write("\n")
   return 0
+
+
+
 
 def hiddenNodesExp():
-  outfile = open("../output/hiddenNodesExp.txt", 'w')
+  period_outfile = open("../output/hiddenNodesExp_period.csv", 'w')
+  height_outfile = open("../output/hiddenNodesExp_height.csv", 'w')
 
-  num_hidden = 20
-  num_prev_waves = 5
-  prev_waves = [5, 7, 10]
+  filenames = [calm_seas, rough_seas]
+  num_prev_waves = 10
   num_folds = 5
   num_runs = 10
-  num_epochs = 400
+  num_epochs = 1
+  num_after_avg = 5
 
-  print "Hidden Nodes Experiment"
-  outfile.write("Hidden Nodes Experiment"+"\n")
-  #calm seas experiment
+  hidden_nodes = [7, 15, 20, 30]
+
+  datasets = []
+  for filename in filenames:
+    print "Building Dataset:" + str(num_prev_waves) + " - " + filename
+    parsed = fileParse(filename)
+    normalized_parsed = normalizeData(parsed)
+    [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
+    datasets.append(dataset)
+
   for run in range(1, num_runs+1):
-    print "Run", run
-    outfile.write("\nRun: " + str(run) + "\n")
-    print "==========================================================================="
-    print "Train on Calm Seas"
-    outfile.write("===========================================================================\n")
-    outfile.write("Train on Calm Seas\n")
+    print "\nRun: " + str(run) 
 
-    filenames = [calm_seas, rough_seas]
-
-    datasets = []
-    for filename in filenames:
-      parsed = fileParse(filename)
-      #print len(parsed[0])
-      normalized_parsed = normalizeData(parsed)
-      [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
-      datasets.append(dataset)
-
-    training_dataset = datasets[0]
-    for num_hidden in [15, 20, 30]:
-      print "Num Hidden:", num_hidden
-      outfile.write("Num Hidden: " + str(num_hidden) + "\n")
-      errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
-      avg_height_error = []
-      avg_period_error = []
-      for item in errors:
-        avg_height_error.append(item[0])
-        avg_period_error.append(item[1])
-      print "Avg Height Error:", avg_height_error
-      print "Avg Period Error:", avg_period_error
-
-      outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
-      outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
-
-    print "==========================================================================="
-    print "Train on Rough Seas"
-    outfile.write("===========================================================================\n")
-    outfile.write("Train on Rough Seas\n")
-
-    filenames = [rough_seas, calm_seas]
-
-    datasets = []
-    for filename in filenames:
-      parsed = fileParse(filename)
-      #print len(parsed[0])
-      normalized_parsed = normalizeData(parsed)
-      [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
-      datasets.append(dataset)
-
-    training_dataset = datasets[0]
-    for num_hidden in [15, 20, 30]:
-      print "Num Hidden:", num_hidden
-      outfile.write("Num Hidden: " + str(num_hidden) + "\n")
-      errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
-      avg_height_error = []
-      avg_period_error = []
-      for item in errors:
-        avg_height_error.append(item[0])
-        avg_period_error.append(item[1])
-      print "Avg Height Error:", avg_height_error
-      print "Avg Period Error:", avg_period_error
-
-      outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
-      outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
+    for ii, training_dataset in enumerate(datasets):
+      for num_hidden in hidden_nodes:
+        print "Training on Dataset: " + filenames[ii] + " - " + str(num_hidden)
+        errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
+        for item in errors:
+          print item
+          height_outfile.write(str(item[0]) + ", ")
+          period_outfile.write(str(item[1]) + ", ")
+    period_outfile.write("\n")
+    height_outfile.write("\n")
   return 0
 
+
+
+
 def generalizabilityExp():
-  outfile = open("../output/generalizabilityExp.txt", 'w')
+  period_outfile = open("../output/generalizabilityExp_period.csv", 'w')
+  height_outfile = open("../output/generalizabilityExp_height.csv", 'w')
 
   num_hidden = 20
   num_prev_waves = 5
-  prev_waves = [5, 7, 10]
   num_folds = 5
   num_runs = 10
-  num_epochs = 400
+  num_epochs = 1
+  eval_filenames = ['../data/10_11_0600.csv', '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1800.csv']
+  train_filenames = ['../data/11_11_1200.csv', '../data/10_11_0000.csv']
 
-  print "Generalizability Experiment"
-  outfile.write("Generalizability Experiment"+"\n")
-  #calm seas experiment
+
+  training_datasets = []
+  for filename in train_filenames:
+    print "Building Training Dataset:" + str(num_prev_waves) + " - " + filename
+    parsed = fileParse(filename)
+    normalized_parsed = normalizeData(parsed)
+    [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
+    training_datasets.append(dataset)
+
+  eval_datasets = []
+  for filename in eval_filenames:
+    print "Building Eval Dataset:" + str(num_prev_waves) + " - " + filename
+    parsed = fileParse(filename)
+    normalized_parsed = normalizeData(parsed)
+    [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
+    eval_datasets.append(dataset)
+
+
   for run in range(1, num_runs+1):
-    print "Run", run
-    outfile.write("\nRun: " + str(run) + "\n")
-    print "==========================================================================="
-    print "Train on Calm Seas"
-    outfile.write("===========================================================================\n")
-    outfile.write("Train on Calm Seas\n")
+    print "\nRun: " + str(run) 
 
-    filenames = ['../data/11_11_1200.csv', '../data/10_11_0000.csv', '../data/10_11_0600.csv', '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1800.csv', ]
-    print filenames
-    outfile.write(str(filenames)+"\n")
-
-    datasets = []
-    for filename in filenames:
-      parsed = fileParse(filename)
-      #print len(parsed[0])
-      normalized_parsed = normalizeData(parsed)
-      [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
-      datasets.append(dataset)
-
-    training_dataset = datasets[0]
-    errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
-    avg_height_error = []
-    avg_period_error = []
-    for item in errors:
-      avg_height_error.append(item[0])
-      avg_period_error.append(item[1])
-    print "Avg Height Error:", avg_height_error
-    print "Avg Period Error:", avg_period_error
-
-    outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
-    outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
-
-    print "==========================================================================="
-    print "Train on Rough Seas"
-    outfile.write("===========================================================================\n")
-    outfile.write("Train on Rough Seas\n")
-
-    filenames = ['../data/10_11_0000.csv', '../data/10_11_0600.csv', '../data/10_11_1200.csv', '../data/10_11_1800.csv', '../data/11_11_0000.csv', '../data/11_11_0600.csv', '../data/11_11_1200.csv', '../data/11_11_1800.csv', ]
-
-    print filenames
-    outfile.write(str(filenames)+"\n")
-
-    datasets = []
-    for filename in filenames:
-      parsed = fileParse(filename)
-      #print len(parsed[0])
-      normalized_parsed = normalizeData(parsed)
-      [dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
-      datasets.append(dataset)
-
-    training_dataset = datasets[0]
-    errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
-    avg_height_error = []
-    avg_period_error = []
-    for item in errors:
-      avg_height_error.append(item[0])
-      avg_period_error.append(item[1])
-    print "Avg Height Error:", avg_height_error
-    print "Avg Period Error:", avg_period_error
-
-    outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
-    outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
-
-
-
-
+    for ii, training_dataset in enumerate(training_datasets):
+      print "Training on Dataset: " + train_filenames[ii]
+      errors = getErrorPercent(training_dataset, eval_datasets, num_hidden, num_epochs)
+      for item in errors:
+        print item
+        height_outfile.write(str(item[0]) + ", ")
+        period_outfile.write(str(item[1]) + ", ")
+    period_outfile.write("\n")
+    height_outfile.write("\n")
 
   return 0
 
 
 def avgWavesExp():
-  outfile = open("../output/avgWavesExp.txt", 'w')
+  period_outfile = open("../output/avgWavesExp_period.csv", 'w')
+  height_outfile = open("../output/avgWavesExp_height.csv", 'w')
 
+  filenames = [calm_seas, rough_seas]
   num_hidden = 20
-  num_prev_waves = 10
   prev_waves = 10
   num_folds = 5
-  num_runs = 1
-  num_epochs = 400
-  num_after_avg = [5, 10, 15]
+  num_runs = 10
+  num_epochs = 1
+  num_prev_waves = 5
+  avg_waves = [5, 10, 15]
 
-  print "Average Waves Experiment"
-  outfile.write("Average Waves Experiment"+"\n")
-  #calm seas experiment
   for run in range(1, num_runs+1):
-    print "Run", run
-    outfile.write("\nRun: " + str(run) + "\n")
-    print "==========================================================================="
-    print "Train on Calm Seas"
-    outfile.write("===========================================================================\n")
-    outfile.write("Train on Calm Seas\n")
+    print "\nRun: " + str(run) 
 
-    filenames = [calm_seas, rough_seas]
-    for num_avg_waves in num_after_avg:
+    for waves_id, num_avg_waves in enumerate(avg_waves):
       datasets = []
-      print "Number of Average Waves:\n", num_avg_waves
-      outfile.write("Number of Previous Waves: " + str(num_avg_waves) +"\n")
       for filename in filenames:
+        print "Building Dataset:" + " - " + str(num_avg_waves)+filename
         parsed = fileParse(filename)
-        #print len(parsed[0])
         normalized_parsed = normalizeData(parsed)
-        # To Run with predicting next wave
-        #[dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
-        # To Run with predicting average of some number of next waves
         [dataset, num_inputs, num_outputs] = generateDatasetAverage(num_prev_waves, num_avg_waves, normalized_parsed)
         datasets.append(dataset)
 
-      training_dataset = datasets[0]
-      #print len(training_dataset[0][0])
-      errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
-      avg_height_error = []
-      avg_period_error = []
-      for item in errors:
-        avg_height_error.append(item[0])
-        avg_period_error.append(item[1])
-      print "Avg Height Error:", avg_height_error
-      print "Avg Period Error:", avg_period_error
-
-      outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
-      outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
-
-    #rough seas experiment
-    print "==========================================================================="
-    print "Train on Rough Seas"
-    outfile.write("==========================================================================="+"\n")
-    outfile.write("Train on Rough Seas"+"\n")
-
-    filenames = [rough_seas, calm_seas]
-    for num_avg_waves in num_after_avg:
-      datasets = []
-      print "Number of Previous Waves:", num_avg_waves
-      outfile.write("Number of Previous Waves: " + str(num_avg_waves)+"\n")
-      for filename in filenames:
-        parsed = fileParse(filename)
-        #print len(parsed[0])
-        normalized_parsed = normalizeData(parsed)
-        # To Run with predicting next wave
-        #[dataset, num_inputs, num_outputs] = generateDataset(num_prev_waves, normalized_parsed)
-        # To Run with predicting average of some number of next waves
-        [dataset, num_inputs, num_outputs] = generateDatasetAverage(num_prev_waves, num_avg_waves, normalized_parsed)
-        datasets.append(dataset)
-
-      training_dataset = datasets[0]
-      #print len(training_dataset[0][0])
-      errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
-      avg_height_error = []
-      avg_period_error = []
-      for item in errors:
-        avg_height_error.append(item[0])
-        avg_period_error.append(item[1])
-      print "Avg Height Error:", avg_height_error
-      print "Avg Period Error:", avg_period_error
-
-      outfile.write("Avg Height Error: " + str(avg_height_error)+"\n")
-      outfile.write("Avg Period Error: " + str(avg_period_error)+"\n")
-
+      for ii, training_dataset in enumerate(datasets):
+        print "Training on Dataset: "+ str(num_avg_waves) + " - " + filenames[ii]
+        errors = getErrorPercent(training_dataset, datasets, num_hidden, num_epochs)
+        for item in errors:
+          print item
+          height_outfile.write(str(item[0]) + ", ")
+          period_outfile.write(str(item[1]) + ", ")
+    period_outfile.write("\n")
+    height_outfile.write("\n")
   return 0
+

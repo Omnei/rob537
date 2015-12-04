@@ -13,10 +13,12 @@ def main():
   #[rough_seas, calm_seas] = formatOutput('../output/generalizabilityExp.txt')
   #print rough_seas
   #formatMat(rough_seas)
-  #prevWavesExp()
+  prevWavesExp()
   avgWavesExp()
-  #hiddenNodesExp()
-  #generalizabilityExp()
+  hiddenNodesExp()
+  generalizabilityExp()
+  baselineExp()
+
   # num_hidden = 20
   # num_prev_waves = 5
   # num_folds = 5

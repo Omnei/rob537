@@ -1,0 +1,23 @@
+~~Note Lines Correspond to Columns in output files~~
+~~Output file lines correspond to runs~~
+
+Trained: Calm // 5 Prev Waves // Evaluated: Calm
+Trained: Calm // 5 Prev Waves // Evaluated: Rough
+Trained: Rough // 5 Prev Waves // Evaluated: Calm
+Trained: Rough // 5 Prev Waves // Evaluated: Rough
+
+Trained: Calm // 7 Prev Waves // Evaluated: Calm
+Trained: Calm // 7 Prev Waves // Evaluated: Rough
+Trained: Rough // 7 Prev Waves // Evaluated: Calm
+Trained: Rough // 7 Prev Waves // Evaluated: Rough
+
+Trained: Calm // 10 Prev Waves // Evaluated: Calm
+Trained: Calm // 10 Prev Waves // Evaluated: Rough
+Trained: Rough // 10 Prev Waves // Evaluated: Calm
+Trained: Rough // 10 Prev Waves // Evaluated: Rough
+
+Trained: Calm // 10 Prev Waves // Evaluated: Calm
+Trained: Calm // 10 Prev Waves // Evaluated: Rough
+Trained: Rough // 10 Prev Waves // Evaluated: Calm
+Trained: Rough // 10 Prev Waves // Evaluated: Rough
+

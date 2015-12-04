@@ -1,0 +1,21 @@
+~~Note Lines Correspond to Columns in output files~~
+~~Output file lines correspond to runs~~
+
+
+Train: Calm // Eval: 10/11 06:00
+Train: Calm // Eval: 10/11 12:00
+Train: Calm // Eval: 10/11 18:00
+
+Train: Calm // Eval: 11/11 00:00
+Train: Calm // Eval: 11/11 06:00
+Train: Calm // Eval: 11/11 18:00
+
+Train: Rough // Eval: 10/11 06:00
+Train: Rough // Eval: 10/11 12:00
+Train: Rough // Eval: 10/11 18:00
+
+Train: Rough // Eval: 11/11 00:00
+Train: Rough // Eval: 11/11 06:00
+Train: Rough // Eval: 11/11 18:00
+
+

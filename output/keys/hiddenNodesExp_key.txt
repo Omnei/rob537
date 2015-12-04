@@ -1,0 +1,26 @@
+~~Note Lines Correspond to Columns in output files~~
+~~Output file lines correspond to runs~~
+
+Train on Calm // 7 Hidden Nodes // Evaluate on Calm
+Train on Calm // 7 Hidden Nodes // Evaluate on Rough
+
+Train on Calm // 15 Hidden Nodes // Evaluate on Calm
+Train on Calm // 15 Hidden Nodes // Evaluate on Rough
+
+Train on Calm // 20 Hidden Nodes // Evaluate on Calm
+Train on Calm // 20 Hidden Nodes // Evaluate on Rough
+
+Train on Calm // 30 Hidden Nodes // Evaluate on Calm
+Train on Calm // 30 Hidden Nodes // Evaluate on Rough
+
+Train on Rough // 7 Hidden Nodes // Evaluate on Calm
+Train on Rough // 7 Hidden Nodes // Evaluate on Rough
+
+Train on Rough // 15 Hidden Nodes // Evaluate on Calm
+Train on Rough // 15 Hidden Nodes // Evaluate on Rough
+
+Train on Rough // 20 Hidden Nodes // Evaluate on Calm
+Train on Rough // 20 Hidden Nodes // Evaluate on Rough
+
+Train on Rough // 30 Hidden Nodes // Evaluate on Calm
+Train on Rough // 30 Hidden Nodes // Evaluate on Rough
